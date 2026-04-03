@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            line-height: 1.4;
+            color: #1e2a3e;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .resume {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0b2b3d 0%, #1c4e6f 100%);
+            color: white;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header-left {
+            margin-top: 10px;
+            flex: 1;
+        }
+
+        .name {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            padding-left: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #e0edf5;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 30px;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .photo-placeholder {
+            width: 90px;
+            height: 108px;
+            background: #f0f4f8;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: #2c6e8f;
+            font-weight: 500;
+            text-align: center;
+            background: #e9f0f5;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            margin-left: 10px;
+            overflow: hidden;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content {
+            padding: 14px 24px 20px;
+            flex: 1;
+        }
+
+        section {
+            margin-bottom: 12px;
+            break-inside: avoid;
+        }
+
+        .section-title {
+            margin-left: 10px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f4c5f;
+            border-left: 5px solid #1B4D6D;
+            padding-left: 10px;
+            margin-bottom: 8px;
+            margin-top: 0;
+        }
+
+        .edu-item {
+            background: #f9fbfd;
+            border-radius: 14px;
+            padding: 10px 16px;
+            border: 1px solid #e2edf2;
+        }
+
+        .edu-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4663;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .edu-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            font-size: 0.78rem;
+            color: #4a627a;
+            margin-bottom: 6px;
+            border-bottom: 1px dashed #d4e2e8;
+            padding-bottom: 5px;
+        }
+
+        .course-highlight {
+            background: #eef3fc;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .project-item,
+        .thesis-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 8px 16px;
+            margin-bottom: 10px;
+            border: 1px solid #e9f0f4;
+        }
+
+        .project-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #0f4c5f;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .project-date {
+            font-size: 0.7rem;
+            background: #eef2f5;
+            padding: 2px 8px;
+            border-radius: 20px;
+            color: #2c6e8f;
+        }
+
+        .project-desc {
+            margin-top: 4px;
+            padding-left: 12px;
+        }
+
+        .project-desc p {
+            margin-bottom: 5px;
+            font-size: 0.82rem;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: #eef2fa;
+            color: #1d5a7a;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-top: 3px;
+        }
+
+        .personal-eval {
+            background: linear-gradient(120deg, #fefaf0 0%, #fff9ef 100%);
+            border-radius: 16px;
+            padding: 10px 18px;
+            border: 1px solid #ffe2b5;
+        }
+
+        .eval-text {
+            font-size: 0.82rem;
+            color: #2d3e50;
+            text-align: justify;
+            line-height: 1.45;
+        }
+
+        .highlight-text {
+            background: linear-gradient(120deg, #fff0c0 0%, #ffe6a3 100%);
+            padding: 0 3px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .honor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+            margin-left: 15px;
+        }
+
+        .honor-badge {
+            background: #edf4f8;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1f5e7e;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .skill-cat {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 6px 10px;
+            flex: 1 1 170px;
+            border: 1px solid #dee9ef;
+        }
+
+        .skill-cat strong {
+            display: block;
+            font-size: 0.75rem;
+            color: #1a5a78;
+            margin-bottom: 5px;
+            border-left: 3px solid #ffaa33;
+            padding-left: 8px;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1px;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            background: #eef2fa;
+            padding: 2px 8px;
+            border-radius: 16px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #1c6285;
+            white-space: nowrap;
+        }
+
+        .skill-cat.skill-cat-40 {
+            flex: 4.3 1 0;
+        }
+
+        .skill-cat.skill-cat-30 {
+            flex: 2.8 1 0;
+        }
+
+        .skill-cat.skill-cat-20 {
+            flex: 2 1 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .resume {
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                margin: 0;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .personal-eval {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .project-item,
+            .edu-item,
+            .thesis-item {
+                break-inside: avoid;
+            }
+
+            html,
+            body {
+                height: 297mm;
+            }
+
+            @page {
+                size: A4;
+                margin: 12mm 15mm;
+            }
+        }
+
+        @media screen {
+            .resume {
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume">
+        <div class="header">
+            <div class="photo-placeholder">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD" alt="李中海照片">
+            </div>
+            <div class="header-left">
+                <div class="name">
+                    <span>李中海</span>
+                    <span style="font-size: 0.7rem; font-weight: normal;">
+                        <span>📍 山西·朔州 · 2004.02</span>
+                        <span>📞 (+86) 130-5108-1328</span>
+                        <span>✉️ 2504170801@qq.com</span>
+                    </span>
+                </div>
+                <div class="contact-info">
+                    <span>思想政治理论：58</span> |
+                    <span>英语（一）：71</span> |
+                    <span>数学（一）：103</span> |
+                    <span>计算机专业综合：86</span> |
+                    <span><strong>初试总分：317</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- 教育背景 -->
+            <section>
+                <div class="section-title">教育背景</div>
+                <div class="edu-item">
+                    <div class="edu-title">
+                        中国矿业大学（北京） · 地质工程 <span style="font-weight: 500; font-size: 0.8rem;">2022.9 – 2026.7</span>
+                    </div>
+                    <div class="edu-meta">
+                        <span>📊 GPA：3.38/4.0</span>
+                        <span>🏅 专业排名：9/50 (18%)</span>
+                        <span>⭐ 共青团员</span>
+                    </div>
+                    <div class="course-highlight">
+                        <strong>📖 地学主干课程：</strong> 水文地球化学(91) · 工程力学D(91) · 大学化学A(90) · 大学物理2(87)
+                    </div>
+                    <div><strong style="color:#bc6f25; font-size:0.8rem;">🔹 计算机核心课程：</strong> <span
+                            style="font-size:0.8rem;">C语言程序设计(86) · 数据结构 · 计算机网络 · 计算机组成原理 · 操作系统 · 高等数学 · 线性代数·
+                            机器学习</span></div>
+                </div>
+            </section>
+
+            <!-- 荣誉奖项 (移至教育背景之后) -->
+            <section>
+                <div class="section-title">荣誉奖项</div>
+                <div class="honor-list">
+                    <span class="honor-badge">校级奖学金 (2022年、2023年、2024年)</span>
+                    <span class="honor-badge">国家励志奖学金 (2022年)</span>
+                    <span class="honor-badge">中联勘项目·启航计划之星 (2024年)</span>
+                </div>
+            </section>
+
+            <!-- 科研项目 -->
+            <section>
+                <div class="section-title">科研项目</div>
+                <div class="project-item">
+                    <div class="project-title">
+                        基于注意力LSTM的交通碰撞预测
+                        <span class="project-date">2024.4 – 2024.6</span>
+                    </div>
+                    <div class="project-desc">
+                        <p><strong>●  项目简述：</strong>利用纽约和芝加哥的真实时空数据集，在有监督场景下，设计动态演化嵌入和注意力机制，从而考虑到事件间的动态演化交互，设计update-decay机制并对损失函数进行改进，缓解 “数据不平衡” 和 “动态特征过平滑” 问题，设计自适应门控和后处理，最后输出某地某时刻发生车辆碰撞概率。<p>                        <p><strong>● 个人贡献：</strong> 设计了具备时序感知的更新---衰减机制update-decay； 改进了原始损失函数中Focal Loss中对难分类样本权重考虑不足的问题 ，缓解了“数据不平衡”； 通过引入“动态损失”抑制了“动态特征过平滑”现象；设计了自适应门控模块与后处理校正策略，使模型在事件判断与时空定位上更具鲁棒性。</p>
+                        <p><strong>● 成果：</strong> 对比Sniper基线，召回率提升18%，F1分数提升3%，验证了机制的有效性。</p>
+                        <div><span class="tech-tag">Python</span><span
+                                class="tech-tag">LSTM+Attention</span><span class="tech-tag">损失函数优化</span><span
+                                class="tech-tag">时空数据</span><span class="tech-tag">异常检测</span></div>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">
+                        基于深度哈希的软件缺陷报告重复性检测
+                        <span class="project-date">2024.9 – 至今</span>
+                    </div>
+                    <div class="project-desc">
+                         <p><strong>● 项目简述：</strong>企业日接收上万条报告，传统方法难以准确判断重复需求，而一般深度学习方法又难以满足实时处理的需求。现将传统方法和深度学习方法结合，利用深度哈希解决近重复性检测问题，实现软件崩溃报告的快速分类。</p>
+                        <p><strong>● 个人贡献：</strong>
+                            调研近5年顶会论文10余篇；使用通用框架DeepLSH，学习满足局部敏感特性的二进制哈希函数，高效检索近重复堆栈跟踪；设计孪生神经网络架构与原创损失函数，结合正则化解决二值化优化问题；在真实大规模数据集上验证，对比标准LSH和深度哈希基线，证明其有效性与扩展性。
+                        </p>
+                        <p><strong>● 当前进展：</strong> 进行领域迁移，实现软件工程源代码克隆检测。</p>
+                        <div><span class="tech-tag">深度哈希</span><span class="tech-tag">模型复现与迁移</span><span
+                                class="tech-tag">近似重复检测</span><span class="tech-tag">检测结果处理</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 毕业设计 -->
+            <section>
+                <div class="section-title">毕业设计</div>
+                <div class="thesis-item">
+                    <div class="project-title">
+                        黄玉川煤矿采煤沉陷区岩土体力学参数对沉陷变形影响的模拟分析
+                        <span class="project-date">2026.1 – 至今</span>
+                    </div>
+                    <div class="project-desc">
+                        <p>🔹 收集地质勘探报告、岩土力学试验数据，分析地层岩性、构造及水文地质条件，明确控沉主控因素。</p>
+                        <p>🔹 利用 <strong class="highlight-text">FLAC3D</strong>
+                            分析岩土体力学参数对沉陷变形的影响，构建地质模型与参数敏感性分析流程。</p>
+                        <p>🔹 基于模拟结果开展边坡稳定性评价，完成沉陷区综合治理工程设计。</p>
+                        <div><span class="tech-tag">FLAC3D</span><span class="tech-tag">数值模拟</span><span
+                                class="tech-tag">岩土力学</span><span class="tech-tag">参数反演思维</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 个人评价 -->
+            <section>
+                <div class="section-title">个人评价</div>
+                <div class="personal-eval">
+                    <div class="eval-text">
+                        本科期间在扎实学习地质工程的同时，我始终主动追求计算机方向成长，跨专业修读多门核心课程，并坚持自学机器学习与深度学习，完成了交通事件预测、软件缺陷检测等科研项目。这段经历让我兼具地学问题意识与编程建模能力，也锻炼了持续钻研、迎难而上的韧性；同时具备较好的英语阅读与文献检索能力，能够跟进英文论文与前沿进展。
+                    </div>
+                </div>
+            </section>
+
+            <!-- 专业技能 -->
+            <section>
+                <div class="section-title">专业技能</div>
+                <div class="skills-grid">
+                    <div class="skill-cat skill-cat-40">
+                        <strong>地学基础与模拟</strong>
+                        <div class="skill-items">
+                            <span class="skill-tag">地质填图</span>
+                            <span class="skill-tag">岩土力学分析</span>
+                            <span class="skill-tag">GIS基础</span>
+                            <span class="skill-tag">FLAC3D</span>
+                        </div>
+                    </div>
+                    <div class="skill-cat skill-cat-30">
+                        <strong>编程语言</strong>
+                        <div class="skill-items">
+                            <span class="skill-tag">Python </span>
+                            <span class="skill-tag">C++/C</span>
+                        </div>
+                    </div>
+                    <div class="skill-cat skill-cat-20">
+                        <strong>英语能力</strong>
+                        <div class="skill-items">
+                            <span class="skill-tag">CET-6 (479，阅读分 223/248.5)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
